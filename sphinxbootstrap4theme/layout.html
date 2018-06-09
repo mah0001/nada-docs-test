@@ -24,8 +24,8 @@
 
 {%- macro sphinxsidebar() %}
       {%- if render_sidebar %}
-      <div class="sphinxsidebar hidden-sm-down">
-        <div class="sphinxsidebarwrapper">
+      <div xclass="xsphinxsidebar hidden-sm-down " class="sidebar-expanded d-none d-md-block col-2">
+        <div class="xsphinxsidebarwrapper list-group sticky-top sticky-offset">
           {%- block sidebarlogo %}{%- endblock %}
           {%- if sidebars != None %}
             {#- new style sidebar: explicitly include/exclude templates #}
@@ -34,21 +34,21 @@
             {%- endfor %}
           {%- else %}
             {#- old style sidebars: using blocks -- should be deprecated #}
+            
+            {%- block sidebarsearch %}
+            
+            {%- endblock %}
+
             {%- block sidebartoc %}
+            <h3><a href="{{ pathto(master_doc) }}">{{ _('NADA') }}</a></h3>
+            {%- include "searchbox.html" %}
             {%- include "globaltoc.html" %}
             {%- endblock %}
-            {%- block sidebarrel %}
-            {%- include "relations.html" %}
-            {%- endblock %}
-            {%- if customsidebar %}
-            {%- include customsidebar %}
-            {%- endif %}
-            {%- block sidebarsearch %}
-            {%- include "searchbox.html" %}
-            {%- endblock %}
-            {%- block sidebarsourcelink %}
-            {%- include "sourcelink.html" %}
-            {%- endblock %}
+            
+            
+            {#%- block sidebarsourcelink %#}
+            {#%- include "sourcelink.html" %#}
+            {#%- endblock %#}
           {%- endif %}
         </div>
       </div>
@@ -74,7 +74,7 @@
 {%- endblock %}
 
 {%- block content %}
-  {%- block breadcrumb1 %}{{breadcrumb()}}{% endblock %}
+  {%- block breadcrumb1 %}xxxx{% endblock %}
 
   <div class="container-fluid">
     <div class="row">
@@ -87,7 +87,16 @@
         <div class="bodywrapper">
       {%- endif %}
           <div class="body">
+              {{breadcrumb()}}
             {% block body %} {% endblock %}
+            <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+                {% if next %}
+                  <a href="{{ next.link|e }}" class="btn btn-neutral float-right" title="{{ next.title|striptags|e }}" accesskey="n" rel="next">{{ _('Next') }} <span class="fa fa-arrow-circle-right"></span></a>
+                {% endif %}
+                {% if prev %}
+                  <a href="{{ prev.link|e }}" class="btn btn-neutral" title="{{ prev.title|striptags|e }}" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> {{ _('Previous') }}</a>
+                {% endif %}
+              </div>
           </div>
       {%- if render_sidebar %}
         </div>

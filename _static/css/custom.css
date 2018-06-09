@@ -2,3 +2,11 @@
 {
     margin-top:130px;
 }
+
+#searchbox{
+    margin-top:10px;
+}
+
+.sticky-offset {
+    top: 120px;
+}

@@ -1,6 +1,6 @@
     <div class="ihsn-br related container-fluid bg-faded" role="navigation" aria-label="related navigation">
         <div class="row">
-        <ol class="breadcrumb col-md-8">
+        <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ pathto(master_doc) }}">{{ shorttitle|e }}</a></li>
             {%- for parent in parents %}
                 <li class="breadcrumb-item"><a href="{{ parent.link|e }}"
@@ -11,7 +11,8 @@
             {%- endfor %}
             <li class="breadcrumb-item active">{{ title }}</li>
         </ol>
-       <div class="relation col-md-4">
+       
+        <!--<div class="relation col-md-4">
            <div class="pull-xs-right">
                <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
                {%- if prev %}
@@ -26,6 +27,7 @@
                {%- endif %}
                </div>
            </div>
-       </div>
+       </div>-->
+
     </div>
     </div>

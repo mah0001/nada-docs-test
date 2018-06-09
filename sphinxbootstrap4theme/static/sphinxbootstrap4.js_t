@@ -7,6 +7,7 @@ function stickySidebar() {
     var $sidebarwrapper = $('.sphinxsidebarwrapper');
     var $document = $('.document');
     var sidebarTop = $sidebarwrapper.offset().top - parseInt($sidebarwrapper.css('margin-top'),10);
+    console.log(sidebarTop);
     var $window = $(window);
     var documentBottom = $document.outerHeight(true) + topPadding;
     var sidebarHeight = $sidebarwrapper.height();
@@ -100,6 +101,6 @@ $(function() {
 
 {% if theme_sidebar_fixed %}
 $(window).on('load', function(){
-  stickySidebar()
+  //stickySidebar()
 });
 {% endif %}
