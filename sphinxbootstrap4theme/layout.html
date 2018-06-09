@@ -27,24 +27,23 @@
       <div xclass="xsphinxsidebar hidden-sm-down " class="sidebar-expanded d-none d-md-block col-2">
         <div class="xsphinxsidebarwrapper list-group sticky-top sticky-offset">
           {%- block sidebarlogo %}{%- endblock %}
-          {% if sidebars != None %}
+          {%- if sidebars != None %}
             {#- new style sidebar: explicitly include/exclude templates #}
-            {% for sidebartemplate in sidebars %}
-            {% include sidebartemplate %}
-            {% endfor %}
-          {% else %}
-            {# old style sidebars: using blocks -- should be deprecated #}
+            {%- for sidebartemplate in sidebars %}
+            {%- include sidebartemplate %}
+            {%- endfor %}
+          {%- else %}
+            {#- old style sidebars: using blocks -- should be deprecated #}
             
-            {% block sidebarsearch %}
+            {%- block sidebarsearch %}
             
-            {% endblock %}
+            {%- endblock %}
 
-            {% block sidebartoc %}
+            {%- block sidebartoc %}
             <h3><a href="{{ pathto(master_doc) }}">{{ _('NADA') }}</a></h3>
-            testing........
-            {% include "searchbox.html" %}
-            {% include "globaltoc.html" %}
-            {% endblock %}
+            {%- include "searchbox.html" %}
+            {%- include "globaltoc.html" %}
+            {%- endblock %}
                         
           {%- endif %}
         </div>
@@ -75,14 +74,22 @@
 
   <div class="container-fluid">
     <div class="row">
-  {%- block sidebar1 %} {% if theme_show_sidebar|tobool and not theme_sidebar_right|tobool %}{{ sphinxsidebar() }}{% endif %} {% endblock %}
+  {#%- block sidebar1 %} {% if theme_show_sidebar|tobool and not theme_sidebar_right|tobool %}{{ sphinxsidebar() }}{% endif %} {% endblock %#}
+
+  <div xclass="ccccxsphinxsidebar hidden-sm-down " class="sidebar-expanded d-none d-md-block col-2">
+      <div class="xsphinxsidebarwrapper list-group sticky-top sticky-offset">
+          <h3><a href="{{ pathto(master_doc) }}">{{ _('NADA') }}</a></h3>
+          {% include "searchbox.html" %}
+          {% include "globaltoc.html" %}
+      </div>
+    </div>
 
     <div class="document">
     {%- block document %}
       <div class="documentwrapper">
-      {%- if render_sidebar %}
+      {# %- if render_sidebar %#}
         <div class="bodywrapper">
-      {%- endif %}
+      {#%- endif %#}
           <div class="body">
               {{breadcrumb()}}
             {% block body %} {% endblock %}
@@ -95,9 +102,9 @@
                 {% endif %}
               </div>
           </div>
-      {%- if render_sidebar %}
+      {#%- if render_sidebar %#}
         </div>
-      {%- endif %}
+      {#%- endif %#}
       </div>
   {%- endblock %}
     </div>
