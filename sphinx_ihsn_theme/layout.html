@@ -1,0 +1,121 @@
+{% extends "basic/layout.html" %}
+
+{% block htmltitle %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+
+    {{ super() }}
+{% endblock %}
+
+{% set css_files = css_files + [
+  '_static/bootstrap-4.1.0/css/bootstrap.min.css',
+  '_static/sphinxbootstrap4.css',
+    '_static/css/custom.css',
+    '_static/css/style.css',
+    '_static/css/local.css'
+
+] %}
+
+{% set script_files = script_files + [
+    '_static/tether-1.3.1/js/tether.min.js',
+    '_static/bootstrap-4.1.0/js/bootstrap.min.js',
+    '_static/sphinxbootstrap4.js',
+    '_static/js/scroll-header.js'
+  ]
+%}
+
+{%- macro sphinxsidebar() %}
+      {%- if render_sidebar %}
+      <div xclass="xsphinxsidebar hidden-sm-down" class="sidebar-expanded col-2 hidden-sm-down ihsn-sidebar">
+        <div class="xsphinxsidebarwrapper list-group sticky-top sticky-offset">
+          {%- block sidebarlogo %}{%- endblock %}
+          {%- if sidebars != None %}
+            {#- new style sidebar: explicitly include/exclude templates #}
+            {%- for sidebartemplate in sidebars %}
+            {%- include sidebartemplate %}
+            {%- endfor %}
+          {%- else %}
+            {#- old style sidebars: using blocks -- should be deprecated #}
+
+            {%- block sidebarsearch %}
+
+            {%- endblock %}
+
+            {%- block sidebartoc %}
+            <h3><a href="{{ pathto(master_doc) }}">{{ _('NADA') }}</a></h3>
+            {%- include "searchbox.html" %}
+            {%- include "globaltoc.html" %}
+            {%- endblock %}
+
+          {%- endif %}
+        </div>
+      </div>
+      {%- endif %}
+{%- endmacro %}
+
+{% macro navBar() %}
+{% include "navbar.html" %}
+{% endmacro %}
+
+{% macro breadcrumb() %}
+{% include "breadcrumb.html" %}
+{% endmacro %}
+
+{%- block relbar1 %}{% endblock %}
+{%- block relbar2 %}{% endblock %}
+
+{%- block header %}{{ navBar() }}{%- endblock %}
+
+
+{%- block footer %}
+{% include "footer.html" %}
+{%- endblock %}
+
+{%- block content %}
+  {%- block breadcrumb1 %}{% endblock %}
+
+  <div class="container-fluid">
+    <div class="row">
+  {#%- block sidebar1 %} {% if theme_show_sidebar|tobool and not theme_sidebar_right|tobool %}{{ sphinxsidebar() }}{% endif %} {% endblock %#}
+
+  <div xclass="ccccxsphinxsidebar hidden-sm-down " class="sidebar-expanded d-none d-md-block col-2 ihsn-sidebar">
+      <div class="xsphinxsidebarwrapper list-group sticky-top sticky-offset">
+          <!--<h3><a href="{{ pathto(master_doc) }}">{{ _('NADA') }}</a></h3>-->
+          {% include "searchbox.html" %}
+          {% include "globaltoc.html" %}
+      </div>
+    </div>
+
+    <div class="document">
+    {%- block document %}
+      <div class="documentwrapper">
+      {# %- if render_sidebar %#}
+        <div class="bodywrapper">
+      {#%- endif %#}
+          <div class="body">
+              {{breadcrumb()}}
+            {% block body %} {% endblock %}
+            <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+                {% if next %}
+                  <a href="{{ next.link|e }}" class="btn btn-neutral float-right" title="{{ next.title|striptags|e }}" accesskey="n" rel="next">{{ _('Next') }} <span class="fa fa-arrow-circle-right"></span></a>
+                {% endif %}
+                {% if prev %}
+                  <a href="{{ prev.link|e }}" class="btn btn-neutral" title="{{ prev.title|striptags|e }}" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> {{ _('Previous') }}</a>
+                {% endif %}
+              </div>
+          </div>
+      {#%- if render_sidebar %#}
+        </div>
+      {#%- endif %#}
+      </div>
+  {%- endblock %}
+    </div>
+
+  {%- block sidebar2 %}{% if theme_show_sidebar|tobool and theme_sidebar_right|tobool %}</div>{{ sphinxsidebar() }}{% endif %}{% endblock %}
+      <div class="clearer"></div>
+    </div>
+  </div>
+  </div>
+{%- endblock %}

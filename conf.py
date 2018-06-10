@@ -44,7 +44,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'nada'
-copyright = u'2013, IHSN'
+copyright = u'2018, IHSN'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -96,7 +96,7 @@ pygments_style = 'sphinx'
 # a list of builtin themes.
 #html_theme = 'default'
 #html_theme = 'sphinx_rtd_theme'
-html_theme='sphinxbootstrap4theme'
+html_theme='sphinx_ihsn_theme'
 
 
 # Theme options are theme-specific and customize the look and feel of a theme
@@ -210,7 +210,7 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'nada.tex', u'nada Documentation',
+  ('index', 'nada.tex', u'NADA Documentation',
    u'IHSN', 'manual'),
 ]
 
@@ -240,7 +240,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'nada', u'nada Documentation',
+    ('index', 'nada', u'NADA Documentation',
      [u'IHSN'], 1)
 ]
 
